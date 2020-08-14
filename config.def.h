@@ -1,18 +1,18 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int gappx     = 7;        /* gaps between windows */
-static const char *fonts[]          = { "Comfortaa:size=11" };
-static const char dmenufont[]       = "monospace:size=11";
+static const char *fonts[]          = { "Iosevka Nerd Font:size=12" };
+static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#2e3440";
 static const char col_gray2[]       = "#434c53";
 static const char col_gray3[]       = "#d8dee9";
 static const char col_gray4[]       = "#eceff4";
-static const char col_cyan[]        = "#88c0d0";
+static const char col_cyan[]        = "#5e81ac";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -30,6 +30,7 @@ static const Rule rules[] = {
 	/* class        instance    title       tags mask     isfloating   monitor */
 	{ "firefox",    NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Thunar",     NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Pcmanfm",     NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Engrampa",   NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "code-oss",   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Gimp",       NULL,       NULL,       1 << 5,       0,           -1 },
@@ -53,7 +54,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -129,7 +130,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,	            XK_w,		spawn,		   SHCMD("alacritty -e nmtui connect") },
     { MODKEY|ShiftMask,	            XK_m,		spawn,		   SHCMD("pavucontrol") },
     { MOD1,		                    XK_space,	spawn,		   SHCMD("rofi -show drun -theme Monokai") },
-    { MODKEY,			            XK_e,		spawn,		   SHCMD("thunar") },
+    { MODKEY,			            XK_e,		spawn,		   SHCMD("pcmanfm") },
     { 0,			                XK_Print,	spawn,		   SHCMD("flameshot gui") },
     { MOD1,			                XK_F1,		spawn,		   SHCMD("xbacklight -dec 10") },
     { MOD1,			                XK_F2,		spawn,		   SHCMD("xbacklight -inc 10") },
