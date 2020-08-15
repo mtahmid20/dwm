@@ -5,7 +5,7 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const unsigned int gappx     = 7;        /* gaps between windows */
+static const unsigned int gappx     = 5;        /* gaps between windows */
 static const char *fonts[]          = { "Iosevka Nerd Font:size=12" };
 static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#2e3440";
@@ -30,7 +30,7 @@ static const Rule rules[] = {
 	/* class        instance    title       tags mask     isfloating   monitor */
 	{ "firefox",    NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Thunar",     NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Pcmanfm",     NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "Pcmanfm",    NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Engrampa",   NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "code-oss",   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Gimp",       NULL,       NULL,       1 << 5,       0,           -1 },
@@ -43,11 +43,10 @@ static const Rule rules[] = {
 	{ "Gparted",    NULL,       NULL,       0,            1,           -1 },
 	{ "Gcalculator",NULL,       NULL,       0,            1,           -1 },
 	{ "Nitrogen",   NULL,       NULL,       0,            1,           -1 },
-	{ "alsamixer",  NULL,       NULL,       0,            1,           -1 },
 	{ "mpv",        NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "vlc",        NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Io.github.celluloid_player.Celluloid",        NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "File Transfer*",   NULL,       NULL,       0,            1,           -1 },
+	{ "File Transfer*", NULL,   NULL,       0,            1,           -1 },
 
 };
 
@@ -127,7 +126,10 @@ static Key keys[] = {
 
 
     { MODKEY,			            XK_w,		spawn,		   SHCMD("firefox") },
-    { MODKEY|ShiftMask,	            XK_w,		spawn,		   SHCMD("alacritty -e nmtui connect") },
+    { MOD1,			                XK_w,		spawn,		   SHCMD("chromium") },
+    { MODKEY|ShiftMask,	            XK_w,		spawn,		   SHCMD("st -e nmtui connect") },
+    { MODKEY|ShiftMask,	            XK_n,		spawn,		   SHCMD("st -e ncmpcpp") },
+    { MODKEY|ShiftMask,	            XK_h,		spawn,		   SHCMD("st -e htop") },
     { MODKEY|ShiftMask,	            XK_m,		spawn,		   SHCMD("pavucontrol") },
     { MOD1,		                    XK_space,	spawn,		   SHCMD("rofi -show drun -theme Monokai") },
     { MODKEY,			            XK_e,		spawn,		   SHCMD("pcmanfm") },
