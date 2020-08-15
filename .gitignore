@@ -7,13 +7,7 @@ drw.o.rej
 dwm.rej
 dwm.1.rej
 dwm.c.rej
-dwm.c.rej
-dwm.o
-dwm.png
-LICENSE
-Makefile
-README
-transient.c
 util.c.rej
 util.h.rej
 util.o.rej
+dwm
