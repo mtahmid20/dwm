@@ -54,6 +54,7 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static const int decorhints  = 1;    /* 1 means respect decoration hints */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -78,6 +79,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
+#include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -91,13 +93,16 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ShiftMask,             XK_f,      fullscreen,     {0} },
+	/*{ MODKEY|ShiftMask,             XK_f,      fullscreen,     {0} },*/
+    { MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_minus,  view,           {.ui = ~0 } },
@@ -120,16 +125,16 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	TAGKEYS(                        XK_0,                      9)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("xkill") },
+    { MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD("betterlockscreen --lock dim") },
+	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("xkill") },
 
 
     { MODKEY,			            XK_w,		spawn,		   SHCMD("firefox") },
     { MOD1,			                XK_w,		spawn,		   SHCMD("chromium") },
     { MODKEY|ShiftMask,	            XK_w,		spawn,		   SHCMD("st -e nmtui connect") },
     { MODKEY|ShiftMask,	            XK_n,		spawn,		   SHCMD("st -e ncmpcpp") },
-    { MODKEY|ShiftMask,	            XK_h,		spawn,		   SHCMD("st -e htop") },
+    { MODKEY|ShiftMask,	            XK_t,		spawn,		   SHCMD("st -e htop") },
     { MODKEY|ShiftMask,	            XK_m,		spawn,		   SHCMD("pavucontrol") },
     { MOD1,		                    XK_space,	spawn,		   SHCMD("rofi -show drun -theme Monokai") },
     { MODKEY,			            XK_e,		spawn,		   SHCMD("pcmanfm") },
