@@ -6,13 +6,13 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int gappx     = 5;        /* gaps between windows */
-static const char *fonts[]          = { "Iosevka Nerd Font:size=12" };
+static const char *fonts[]          = { "Iosevka Nerd Fonts Bold:size=12" };
 static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#2e3440";
 static const char col_gray2[]       = "#434c53";
 static const char col_gray3[]       = "#d8dee9";
 static const char col_gray4[]       = "#eceff4";
-static const char col_cyan[]        = "#5e81ac";
+static const char col_cyan[]        = "#bf616a";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -34,6 +34,8 @@ static const Rule rules[] = {
 	{ "Engrampa",   NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "code-oss",   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Gimp",       NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "Audacity",   NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "openshot", "kdenlive"   NULL,       NULL,       1 << 6,       0,           -1 },
 	{ "obs",        NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "virtualbox", NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "qBittorrent",NULL,       NULL,       1 << 9,       0,           -1 },
@@ -86,9 +88,9 @@ static const char *termcmd[]  = { "alacritty", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,              XK_p,      spawn,          SHCMD("~/.config/rofi/powermenu.sh") },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("~/.config/rofi/powermenu.sh") },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_x, spawn,               {.v = termcmd } },
+	{ MODKEY,                       XK_x,      spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -115,9 +117,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MOD1,                       XK_minus,  setgaps,        {.i = -1 } },
-	{ MOD1,                       XK_equal,  setgaps,        {.i = +1 } },
-	{ MOD1|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+	{ MOD1,                         XK_minus,  setgaps,        {.i = -1 } },
+	{ MOD1,                         XK_equal,  setgaps,        {.i = +1 } },
+	{ MOD1|ShiftMask,               XK_equal,  setgaps,        {.i = 0  } },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
@@ -130,19 +132,17 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	TAGKEYS(                        XK_0,                      9)
     { MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY|ShiftMask,             XK_l,      spawn,          SHCMD("betterlockscreen --lock dim") },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("xkill") },
 
 
     { MODKEY,			            XK_w,		spawn,		   SHCMD("firefox") },
     { MOD1,			                XK_w,		spawn,		   SHCMD("chromium") },
-    { MODKEY|ShiftMask,	            XK_w,		spawn,		   SHCMD("st -e nmtui connect") },
-    { MODKEY|ShiftMask,	            XK_n,		spawn,		   SHCMD("st -e ncmpcpp") },
-    { MODKEY|ShiftMask,	            XK_t,		spawn,		   SHCMD("st -e htop") },
+    { MODKEY|ShiftMask,	            XK_w,		spawn,		   SHCMD("alacritty -e nmtui connect") },
+    { MODKEY|ShiftMask,	            XK_n,		spawn,		   SHCMD("alacritty -e ncmpcpp") },
     { MODKEY|ShiftMask,	            XK_m,		spawn,		   SHCMD("pavucontrol") },
-    { MOD1,		                    XK_space,	spawn,		   SHCMD("rofi -show drun -theme Monokai") },
+    { MOD1,		                    XK_space,	spawn,		   SHCMD("rofi -show drun -theme Monokai -show-icons") },
     { MODKEY,			            XK_e,		spawn,		   SHCMD("pcmanfm") },
-    { 0,			                XK_Print,	spawn,		   SHCMD("flameshot gui") },
+    { ControlMask,			        XK_Print,	spawn,		   SHCMD("flameshot gui") },
     { MOD1,			                XK_F1,		spawn,		   SHCMD("xbacklight -dec 10") },
     { MOD1,			                XK_F2,		spawn,		   SHCMD("xbacklight -inc 10") },
     { 0,			                XK_Pause,	spawn,		   SHCMD("mpc toggle") },
